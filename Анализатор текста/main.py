@@ -10,17 +10,21 @@ def check_on_BadWord(text_analyz):
             fragment = text_analyz[part: part + len(word)]
             fragments.append(fragment)
 
-    result = []
+    result = set()
 
     for word in Bad_words:
         for fragment in fragments:
-            if word == fragment or word in fragment or fragment in word:
-               result.append(word)
+            if word == fragment:
+                result.add(word)
 
     if len(result) == 0:
         return True
 
-    with open("result.txt", "a") as file:
+    print(result)
+    result = list(result)
+    result = [i + "\n" for i in result]
+
+    with open("result.txt", "w") as file:
         file.writelines(result)
 
     return False
